@@ -13,7 +13,7 @@ export async function submitSignIn(previousState: any, formData: FormData) {
     })
   } catch (error: unknown) {
     if (error instanceof AuthError) {
-      return "Authentication error"
+      return "Bad username + password combination"
     }
     throw error
   }

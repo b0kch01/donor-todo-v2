@@ -8,7 +8,6 @@ async function getUserFromDb(email: unknown, password: unknown): Promise<User | 
   return null;
 }
 
-
 export const { handlers, signIn, signOut, auth } = NextAuth({
   debug: false,
   providers: [
@@ -29,4 +28,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
     })
   ],
+  pages: {
+    signIn: "/login",
+  }
 })
