@@ -1,21 +1,29 @@
-import express, { type NextFunction, type Request, type Response } from 'express';
-import { getSession } from "@auth/express";
+import 'dotenv/config'
+
+import { ExpressAuth, getSession, Session } from "@auth/express";
+
+import express from "express";
+import type { Request, Response, NextFunction } from 'express'
 
 const app = express();
 const port = 3001;
 
-export function authSession(req: Request, res: Response, next: NextFunction) {
-  res.locals.session = getSession(req, { providers: [] });
+export async function authSession(req: Request, res: Response, next: NextFunction) {
+  const session = await getSession(req, { providers: [], });
+  res.locals.session = session;
   next();
 }
 
-// app.use(authSession);
+app.set('trust proxy', true);
+app.use("/auth/*", ExpressAuth({ providers: [] }));
+app.use(authSession);
 
 app.get('/', (req: Request, res: Response) => {
   const { session } = res.locals;
+
   res.send({
     message: 'Hello World!',
-    session: session ?? null,
+    session: session?.user ?? null,
   });
 });
 

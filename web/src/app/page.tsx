@@ -44,6 +44,16 @@ export default async function Home() {
         <UsersCard />
       </Suspense>
 
+      <div className="w-full">
+        <Link href={"/realtime-test"}>
+          <Button variant={"ghost"}>
+            <span>
+              Goto <code>/realtime-test</code> <ArrowUpRight className="inline" width={15} />
+            </span>
+          </Button>
+        </Link>
+      </div>
+
     </main>
   );
 }
