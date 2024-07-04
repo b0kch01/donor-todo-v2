@@ -24,16 +24,21 @@ export async function createRandomUser() {
     redirect('/login')
   }
 
-  await prisma.person.create({
-    data: {
-      FirstName: faker.person.firstName(),
-      LastName: faker.person.lastName(),
-      Address: faker.location.streetAddress(),
-      City: faker.location.city()
-    }
-  })
+  const fakeUser = {
+    FirstName: faker.person.firstName(),
+    LastName: faker.person.lastName(),
+    Address: faker.location.streetAddress(),
+    City: faker.location.city()
+  };
 
-  revalidatePath('/')
+  await fetch(`${process.env.SERVER_URL}/api/person`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(fakeUser)
+  })
 }
 
 export async function removeUser(id: number) {
@@ -43,9 +48,8 @@ export async function removeUser(id: number) {
     redirect('/login')
   }
 
-  await prisma.person.delete({
-    where: { PersonID: id }
+  await fetch(`${process.env.SERVER_URL}/api/person/${id}`, {
+    method: 'DELETE',
+    credentials: 'include'
   })
-
-  revalidatePath('/')
 }

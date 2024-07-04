@@ -1,8 +1,21 @@
-export default async function RealtimeTest() {
-  const res = await fetch('http://localhost:3001/');
-  const json = await res.json();
+'use client'
+
+import { useRealtimeContext } from "@/contexts/realtime-context";
+import { Person } from "@prisma/client";
+
+
+export default function RealtimeTest() {
+  const { users } = useRealtimeContext()
 
   return (
-    <p>{JSON.stringify(json)}</p>
+
+    <div>
+      <h1>Realtime Test</h1>
+      <ul>
+        {users.map((user: Person) => (
+          <li key={user.PersonID}>{user.FirstName}</li>
+        ))}
+      </ul>
+    </div>
   )
 }

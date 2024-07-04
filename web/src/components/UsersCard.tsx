@@ -1,13 +1,14 @@
-import { grabUsers } from "@/actions/db"
+'use client'
+
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
 import { Button } from "./ui/button"
 import { createRandomUser } from "@/actions/db"
 import { removeUser } from "@/actions/db"
+import { useRealtimeContext } from "@/contexts/realtime-context"
 
-export default async function UsersCard() {
+export default function UsersCard() {
 
-  await new Promise((resolve) => setTimeout(resolve, 1000))
-  const people = await grabUsers()
+  const { users: people } = useRealtimeContext()
 
   return (
     <Card>

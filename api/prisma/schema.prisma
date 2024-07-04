@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Person {
+  PersonID  Int     @id @default(autoincrement())
+  LastName  String?
+  FirstName String?
+  Address   String?
+  City      String?
+
+  @@index([PersonID])
+}
