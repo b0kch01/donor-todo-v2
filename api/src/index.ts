@@ -32,10 +32,10 @@ app.get('/', (req, res) => {
   const { session } = res.locals;
 
   if (!session?.user) {
-    res.status(401).send({ message: 'Unauthorized;' });
+    return res.status(401).send({ message: 'Unauthorized;' });
   }
 
-  res.send({
+  return res.send({
     message: 'Hello World!',
     cookie: req.cookies ?? null,
     session: session?.user ?? null,
@@ -66,7 +66,7 @@ app.post("/api/person", async (req, res) => {
     data: person
   });
 
-  res.status(200);
+  return res.status(200);
 });
 
 app.delete("/api/person/:id", async (req, res) => {
@@ -90,7 +90,7 @@ app.delete("/api/person/:id", async (req, res) => {
       data: person
     });
   } catch {
-    res.status(200);
+    return res.status(200);
   }
 });
 
