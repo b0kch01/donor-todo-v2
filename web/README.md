@@ -9,13 +9,10 @@ bun run dev
 
 ## .env
 ```env
-DATABASE_URL=...
-SERVER_URL="http://localhost:3001"
-```
+DATABASE_URL="connection URL to database"
+SERVER_URL=""
 
-## .env.local
-```env
-AUTH_SECRET=...
-NEXTAUTH_URL=http://localhost:3000
-AUTH_TRUST_HOST=http://localhost:3000
+AUTH_SECRET="should match server secret"
+NEXTAUTH_URL="this client's domain"
+AUTH_TRUST_HOST="this client's domain"
 ```

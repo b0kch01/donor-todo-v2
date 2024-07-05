@@ -8,7 +8,7 @@ import { useRealtimeContext } from "@/contexts/realtime-context"
 
 export default function UsersCard() {
 
-  const { users: people } = useRealtimeContext()
+  const { users: people, createRandomPerson } = useRealtimeContext()
 
   return (
     <Card>
@@ -23,7 +23,7 @@ export default function UsersCard() {
             <li key={person.PersonID}>
               <form className="inline" action={removeUser.bind(null, person.PersonID)}>
                 <button className="hover:line-through">
-                  {person.FirstName} {person.LastName} ({person.City})
+                  {person.FirstName} {person.LastName} ({person.City}) ({person.PersonID})
                 </button>
               </form>
             </li>
@@ -32,7 +32,7 @@ export default function UsersCard() {
       </CardContent>
 
       <CardFooter>
-        <form action={createRandomUser}>
+        <form action={createRandomPerson}>
           <Button>Add user</Button>
         </form>
       </CardFooter>

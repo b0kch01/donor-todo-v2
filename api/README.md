@@ -8,8 +8,7 @@ bun run dev
 
 ## .env
 ```env
-AUTH_SECRET=...
-NEXTAUTH_URL=http://localhost:3001
-AUTH_TRUST_HOST=http://localhost:3001
-DATABASE_URL=...
+AUTH_SECRET="should match client secret"
+DATABASE_URL="connection URL to database"
+TRUSTED_CLIENT="client domain (for CORS)"
 ```
